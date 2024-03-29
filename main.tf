@@ -13,11 +13,6 @@ resource "aws_vpc" "tfvpc" {
   }
 }
 
-resource "aws_key_pair" "instance_ssh_key" {
-  key_name   = "terraform_ssh_key_${var.environment}"
-  public_key = file("${path.module}/keys/id_rsa_tf.pub")
-}
-
 resource "aws_security_group" "aws-public-sg" {
   name   = "${var.deployer}-public-SG-${var.environment}"
   vpc_id = aws_vpc.tfvpc.id
@@ -56,10 +51,9 @@ module "public_subnet" {
 resource "aws_instance" "tfinstance" {
   ami                    = var.ami
   instance_type          = var.instance_type
-  key_name               = aws_key_pair.instance_ssh_key.key_name
   vpc_security_group_ids = [aws_security_group.aws-public-sg.id]
   subnet_id              = module.public_subnet.subnet_id
-  user_data = templatefile("${path.module}/nginx-cloud-init.cfg",{ package = "nginx" } )
+  user_data              = templatefile("${path.module}/nginx-cloud-init.cfg", { package = "nginx" })
 
   tags = {
     Name = "${var.deployer}-terragrunt-instance-${var.environment}"

@@ -9,3 +9,7 @@ output "public_subnet_id" {
 output "instance_public_ip" {
   value = aws_instance.tfinstance.public_ip
 }
+
+output "environment" {
+  value = var.environment
+}

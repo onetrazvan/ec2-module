@@ -1,7 +1,7 @@
 
 ```main.tf
 module "ec2" {
-  source = "../ec2-module"
+  source = "github.com/onetrazvan/ec2-module.git"
   region           = "eu-west-3"
   environment      = "dev"
   instance_type    = "t2.micro"

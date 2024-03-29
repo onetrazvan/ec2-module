@@ -1,5 +1,5 @@
-main.tf:
 
+```main.tf
 module "ec2" {
   source = "../ec2-module"
   region           = "eu-west-3"
@@ -15,3 +15,4 @@ module "ec2" {
 output "ec2-public-ip" {
   value = module.ec2.instance_public_ip
 }
+```

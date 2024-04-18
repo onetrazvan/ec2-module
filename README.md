@@ -13,6 +13,7 @@ module "ec2" {
 }
 
 
+
 output "ec2-public-ip" {
   value = module.ec2.instance_public_ip
 }

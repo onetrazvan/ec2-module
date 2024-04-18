@@ -12,6 +12,7 @@ module "ec2" {
   deployer          = "Razvan"
 }
 
+
 output "ec2-public-ip" {
   value = module.ec2.instance_public_ip
 }
